@@ -8,15 +8,16 @@ namespace ArchentsIT.Models
 {
     public class CreatePassword
     {
-        [Required(ErrorMessage = "New password required", AllowEmptyStrings = false)]
-        [DataType(DataType.Password)]
+       /* [Required(ErrorMessage = "New password required", AllowEmptyStrings = false)]
+        [DataType(DataType.Password)]*/
      //   [Required]
             public string NewPassword { get; set; }
 
-        [DataType(DataType.Password)]
+/*        [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "New password and confirm password does not match")]
 
-        [Required]
+        [Required]*/
+
          public string ConfirmPassword { get; set; }
     }
 }

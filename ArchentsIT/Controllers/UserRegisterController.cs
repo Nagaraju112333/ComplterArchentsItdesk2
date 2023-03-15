@@ -34,22 +34,23 @@ namespace ArchentsIT.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult UserRegister(UserRegister user)
-                {
-            bool Status = false;
-            string message = "";
-            //b
-            // Model Validation 
-            if (ModelState.IsValid)
+        {
+            try
             {
+                bool Status = false;
+                string message = "";
+                //b
+                // Model Validation 
+
                 #region //Email is already Exist 
                 var isExist = IsEmailExist(user.Email);
                 if (isExist)
                 {
                     ModelState.AddModelError("EmailExist", "Email already exist");
                     ViewBag.IsEmailExist = "Email Is Already Exist";
-                   // return View(user);
+                    // return View(user);
                 }
                 else
                 {
@@ -58,7 +59,7 @@ namespace ArchentsIT.Controllers
                     #endregion
                     #region Generate Activation Code 
                     //user.ActivationCode = Guid.NewGuid();
-                   // user.EmplID = Guid.NewGuid();
+                    // user.EmplID = Guid.NewGuid();
                     #endregion
                     #region  Password Hashing 
                     user.Password = Crypto.Hash(user.Password);
@@ -71,7 +72,7 @@ namespace ArchentsIT.Controllers
                     using (ArchnetsITHelpDesk dc = new ArchnetsITHelpDesk())
                     {
                         user.registercount = 1;
-                        user.RoleType =2;
+                        user.RoleType = 2;
                         dc.UserRegisters.Add(user);
                         dc.SaveChanges();
 
@@ -80,7 +81,7 @@ namespace ArchentsIT.Controllers
                         TempData["Employeename"] = user.FirstName;
                         SendVerificationLinkEmail(user.Email);
                         message = "Registration successfully done. password " +
-                            " has been sent to your email id:" + user.Email; 
+                            " has been sent to your email id:" + user.Email;
                         Status = true;
                         TempData["message"] = message;
                         TempData["Status"] = Status;
@@ -90,15 +91,21 @@ namespace ArchentsIT.Controllers
                     }
                 }
                 #endregion
-               
+
+
+                /* else
+                 {
+                     message = "Invalid Request";
+                 }*/
+                ViewBag.Message = message;
+                ViewBag.Status = Status;
+                return View(user);
             }
-            /* else
-             {
-                 message = "Invalid Request";
-             }*/
-            ViewBag.Message = message;
-            ViewBag.Status = Status;
-           return View(user);
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
         [NonAction]
         public bool IsEmailExist(string emailID)
@@ -119,9 +126,8 @@ namespace ArchentsIT.Controllers
             var fromEmailPassword = "V@11@pu6eddy$"; // Replace with actual password
             string subject = "";
             string body = "";
-           
-                subject = "Your account is successfully created!";
-                body = " <br/><br/>Hello <b>" + TempData["Employeename"] +"</b> <br/> You have been invited for IT support protal for any it related issue please login using following password <br/><b> Your Password is:</b>" +" "+""+" "
+            subject = "Your account is successfully created!";
+            body = " <br/><br/>Hello <b>" + TempData["Employeename"] +"</b> <br/> You have been invited for IT support protal for any it related issue please login using following password <br/><b> Your Password is:</b>" +" "+""+" "
                 +TempData["name"] + "" + "</a> ";
             MailMessage mc = new MailMessage("Complaints.archents@outlook.com", emailID);
             mc.Subject = subject;
@@ -150,11 +156,10 @@ namespace ArchentsIT.Controllers
         }
         // Login Functionality
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        /*[ValidateAntiForgeryToken]*/
         public ActionResult Login(UserLogin user)
        {
-            if (ModelState.IsValid)
-            {
+           
                 string message = "";
                 /* var result = db.UserRegisters.Where(a => a.Email == user.EmailID && a.Password == user.Password).FirstOrDefault();
                  if (result != null)
@@ -199,7 +204,7 @@ namespace ArchentsIT.Controllers
                        
                         
                     }
-                }
+                
                 /*  }
                       else
                       {
@@ -217,9 +222,10 @@ namespace ArchentsIT.Controllers
         [HttpPost]
         public ActionResult CretePassword1(CreatePassword password)
         {
-            if (ModelState.IsValid)
+            try
             {
-              var otpsentsuccessfully=TempData["OtpVerifySuccessfully is"];
+
+                var otpsentsuccessfully = TempData["OtpVerifySuccessfully is"];
                 var email = TempData["Email"];
                 var result = db.UserRegisters.FirstOrDefault(x => x.Email == email);
                 if (result != null)
@@ -227,11 +233,17 @@ namespace ArchentsIT.Controllers
                     result.Password = password.NewPassword;
                     result.registercount = null;
                     db.SaveChanges();
-                    TempData["NewPassword"]= "  New Password Created Successfully";
+                    TempData["NewPassword"] = "  New Password Created Successfully";
                     return RedirectToAction("Login", "UserRegister");
                 }
+
+                return View();
             }
-            return View();
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);  
+            }
+            return View();  
         }
         // Crete New Password View
         [HttpGet]
@@ -241,10 +253,11 @@ namespace ArchentsIT.Controllers
         }
         // create password Functionality
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        /*[ValidateAntiForgeryToken]*/
         public ActionResult CretePassword(CreatePassword user)
         {
-            if (ModelState.IsValid)
+
+            try
             {
                 var result22 = TempData["data"];
                 var resul44 = TempData["data1"];
@@ -254,12 +267,19 @@ namespace ArchentsIT.Controllers
                     result.Password = user.NewPassword;
                     result.registercount = null;
                     db.SaveChanges();
-                  // Session["Successfull"] = "Password SuccessFully  Created Continue to Login...";
-                   TempData["Successfull"] = "Password SuccessFully  Created Continue to Login...";
+                    // Session["Successfull"] = "Password SuccessFully  Created Continue to Login...";
+                    TempData["Successfull"] = "Password SuccessFully  Created Continue to Login...";
                     return RedirectToAction("Login", "UserRegister");
                 }
+                return View();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);  
             }
             return View();
+            
+           
         }
         // forgot password view 
         [HttpGet]
@@ -272,8 +292,7 @@ namespace ArchentsIT.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(ForgotPassword password)
         {
-            if (ModelState.IsValid)
-            {
+           
                 bool Status = false;
                 string message1 = "";
                 //  var result = db.UserRegisters.ToList();
@@ -325,7 +344,7 @@ namespace ArchentsIT.Controllers
                 {
                     ViewBag.message = "Please Enter Valid Email";
                 }
-            }
+           
             return View();
         }
         // sent verification otp in register emailId
@@ -377,16 +396,17 @@ namespace ArchentsIT.Controllers
         [HttpPost]
         public ActionResult Verifyotp(VerifyOtp opt)
         {
-           if(ModelState.IsValid)
+
+            try
             {
                 var result = db.UserRegisters.FirstOrDefault(x => x.Otp == opt.Otp);
-               
+
                 if (result != null)
                 {
                     TempData["Email"] = result.Email;
                     result.Otp = null;
                     db.SaveChanges();
-                   // Session["OtpVerifySuccessfully"] = "Otp Verify Successfully";
+                    // Session["OtpVerifySuccessfully"] = "Otp Verify Successfully";
                     TempData["OtpVerifySuccessfully"] = "Otp Verify Successfully";
                     return RedirectToAction("CretePassword1", "UserRegister");
                 }
@@ -394,6 +414,13 @@ namespace ArchentsIT.Controllers
                 {
                     ViewBag.message = "enter valid otp";
                 }
+
+                return View();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);  
+                
             }
             return View();
         }

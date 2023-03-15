@@ -103,10 +103,10 @@ p {
     color: black;
 }
 
-.bi-eye-slash {
+.bi-eye-slash{
     position: absolute;
-    top: 58%;
-    right: 4%;
+    top: 10%;
+    right: 1%;
     cursor: pointer;
 }
 
@@ -119,4 +119,7 @@ p {
     /*background: linear-gradient(to right, #ddd6f3 0%, #faaca8 100%);*/
   /*  background : linear-gradient(to right, #c9d6ff 0%, #e2e2e2 100%);*/
 
+}
+.error{
+    color:red;
 }

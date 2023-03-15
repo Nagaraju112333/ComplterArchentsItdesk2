@@ -1,0 +1,58 @@
+﻿.maindiv {
+    margin-left: 500px;
+}
+
+.mainmina {
+    margin-top: 100px;
+}
+
+#TicketNo {
+    border-color: black;
+}
+
+#Date {
+    border-color: black;
+}
+
+#Status {
+    border-color: black;
+}
+
+#Assigned_Person {
+    border-color: black;
+}
+
+#Query {
+    border-color: black;
+}
+
+#EmployeeID {
+    border-color: black;
+}
+
+#fname {
+    color: black;
+}
+
+#IssueTypeId {
+    border-color: black;
+}
+
+#IssueTypeIddd {
+    border-color: black;
+}
+
+#Assigned_Person {
+    border-color: black;
+}
+
+#Query {
+    border-color: black;
+}
+
+.bi-caret-down-fill {
+    position: absolute;
+    top: 5px;
+    right: 51%;
+    cursor: pointer;
+}

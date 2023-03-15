@@ -1,0 +1,29 @@
+﻿/* .container1 {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        #hotelsTable{
+            margin-left:10px;
+            margin-right:10px;
+        }*/
+.maindiv {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3px;
+}
+
+    .maindiv a {
+        border-radius: 15px;
+    }
+
+table thead {
+    justify-content: space-evenly;
+}
+
+#addnewbtn {
+    margin-bottom: -20px;
+}
+
+#addnewbtn {
+    font-size: 22px;
+}

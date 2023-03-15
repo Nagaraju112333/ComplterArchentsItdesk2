@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>UserRegister</title>
     <!-- Latest compiled and minified CSS -->
@@ -18,7 +21,60 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="~/CSS/Userregister.css" rel="stylesheet" />
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            Clientvalidation();
+        });
+        function Clientvalidation() {
+            $("#formregister").validate({
+                rules: {
+                    'FirstName': {
+                        required: true
+                    },
+                    'LastName': {
+                        required: true,
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'Designation': {
+                        required: true,
+                    },
+                    'Phone_Number': {
+                        required: true,
+                        number: true,
+                        maxlength: 10
+
+                    }
+
+                },
+                messages: {
+                    'FirstName': {
+                        required: 'FirstName is required',
+                       
+                    },
+                    'LastName': {
+                        required: 'LastName is required'
+                       
+                    },
+                    'Email': {
+                        required: 'Email is required',
+                        email: 'Please enter valid email'
+                    },
+                    'Designation': {
+                        required: 'Designation is required',
+                    },
+                    'Phone_Number': {
+                        required: 'Phone Number is required',
+                        number: 'Enter only Numbers',
+                        maxlength: 'maximum length of phone number is 10'
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="">
@@ -42,13 +98,13 @@
                 }
             }
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("UserRegister", "UserRegister", FormMethod.Post, htmlAttributes: new {@id= "formregister" }))
             {
-                @Html.AntiForgeryToken()
+                @*@Html.AntiForgeryToken()*@
 
                 <div class="form-horizontal">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                 @*   @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
 
                     <h6 style="color:lightcoral">@ViewBag.IsEmailExist</h6>
                     <br />

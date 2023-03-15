@@ -9,6 +9,11 @@
 
 <html>
 <head>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
     <link href="~/CSS/Login.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css/">
 
@@ -24,7 +29,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            Clientvalidation();
+        });
+        function Clientvalidation() {
+            $("#formregister").validate({
+                rules: {
+                    'EmailID': {
+                        required: true,
+                        email: true
+                    },
+                    'Password': {
+                        required: true,
+                        minlength:6
+                    }
+
+                },
+                messages: {
+                    'EmailID': {
+                        required: 'Email is required',
+                        email: "Enter Valid Email Address"
+                    },
+                    'Password': {
+                        required: 'Password is required',
+                        minlength: 'minimum length of password is 6'
+                    }
+                }
+            });
+        }
+    </script>
+    
 
 </head>
 <body>
@@ -59,40 +95,32 @@
                     <button class="close" data-dismiss="alert">X</button>
                 </div>
             }
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("", "", FormMethod.Post, htmlAttributes: new {@id= "formregister" }))
             {
-                @Html.AntiForgeryToken()
+                HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+             
 
                 <div class="form-horizontal card p-3">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @*@if (Session["Successfull"] != "")
-                {
-                    <div class="text-success">@Session["Successfull"]</div>
-                }*@
-
+               
+            
                     <h3 id="p2"> Login</h3>
                     @if (ViewBag.Message != "")
                 {
                     <div class="text-danger">@ViewBag.Message</div>
                 }
                     <div class="form-group">
-                        @*  @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label " })*@
+                       
                         <label id="emiallable">Email</label>
                         <div class="form-group-lg ">
                             @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "Email" } })
-                            @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        @*  @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })*@
                         <label id="passwordlabel">Password</label>
-                        <div class="form-group-lg">
+                        <div class="form-group-lg" style="position:relative">
                             <input type="password" name="Password" id="password" class="form-control w-100" placeholder="Password" AutoCompleteType="current-password" />
-                            @*<i class="bi bi-eye" id="showpassword"></i>*@
-                            <i class="bi bi-eye-slash" id="togglePassword"></i>
-                            @*  @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control w-100", @type = "password", placeholder = "Password", AutoCompleteType = "current-password" } })*@
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <i class="bi bi-eye-slash" id="togglePassword" style="position:absolute"></i>
                         </div>
                         <div class="text-end pt-2">
                             <a>  @Html.ActionLink("Forgot your password?", "ForgotPassword", "UserRegister", new { style = "text-decoration:none; color:black" })</a>

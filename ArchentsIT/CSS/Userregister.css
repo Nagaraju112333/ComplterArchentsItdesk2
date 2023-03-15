@@ -66,3 +66,6 @@ p {
 body {
     color: #000000;
 }
+.error{
+    color:red;
+}

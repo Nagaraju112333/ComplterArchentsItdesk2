@@ -14,82 +14,84 @@
     <link href="~/CSS/Layout.css" rel="stylesheet" />
 </head>
 <body>
-   <div class="">
-       <div style="display:flex">
-           <div class="archnetsHeader ">
-               <img src="~/Images/Archents1.jpg" width="141" height="40" />
-           </div>
-           <div class="p3">
-               <h1>IT Help Desk</h1>
-           </div>
-           @if (User.Identity.IsAuthenticated)
-           {
-
-               if (User.IsInRole("2"))
-               {
-                  
-                       <div style="display:flex" id="icindiv">
-                           <div class="username">
-                               <a>
-                                   <p>Hi-@Session["LoginName"]</p>
-                               </a>
-                           </div>
-                           <div>
-                               <div class="dropdown" id="account">
-                                   <a class="atag" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-circle"></i></a>
-                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                       <li> <a href="/UserRegister/Logout/" class="dropdown-item"> <i class="bi bi-arrow-left-circle" style="margin-right:5px;"></i>Logout</a> </li>
-                                       <li><a class="dropdown-item" href="/UserRegister/Profile"><i class="bi bi-person-plus" style="margin-right:5px;"></i>Profile</a></li>
-
-                                   </ul>
-                               </div>
-                           </div>
-                           <br />
-                        @*   <a href="~/Admin/Testing">Test</a>*@
-                           @* <a href="">Admin</a>*@
-                       </div>
-               }
-               else
-               {
-                   if (User.Identity.IsAuthenticated)
-                   {
-                       <div style="display:flex" id="icindiv">
-                           <div class="username">
-                               <a>
-                                   <p>Hi-@Session["AdminLogin"]</p>
-                               </a>
-                           </div>
-                           <div>
-                               <div class="dropdown" id="account">
-                                   <a class="atag" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-circle"></i></a>
-                                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                       <li> <a href="/UserRegister/Logout/" class="dropdown-item"> <i class="bi bi-arrow-left-circle" style="margin-right:5px;"></i>Logout</a> </li>
-                                       <li><a class="dropdown-item" href="/UserRegister/Profile"><i class="bi bi-person-plus" style="margin-right:5px;"></i>Profile</a></li>
-                                   </ul>
-                               </div>
-                           </div>
-                       </div>
-                   }
-               }
-
-           }
-        
-           <div>
-
-               <!-- Button trigger modal -->
-               @*  <div id="account">
-
-                <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>*@
-           </div>
-       </div>
-       <div>
-           @RenderBody()
-       </div>
-       <div class="footer">
+    <div class="">
+        <div style="display:flex">
+            <div class="archnetsHeader ">
+                <img src="~/Images/Archents1.jpg" width="141" height="40" />
             </div>
-   </div>
+            <div class="p3">
+                <h1>IT Help Desk</h1>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                if (User.IsInRole("2"))
+                {
+
+                    <div style="display:flex" id="icindiv">
+                        <div class="username">
+                            <a>
+                                <p>Hi-@Session["LoginName"]</p>
+                            </a>
+                        </div>
+                        <div>
+                            <div class="dropdown" id="account">
+                                <a class="atag" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-circle"></i></a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li> <a href="/UserRegister/Logout/" class="dropdown-item"> <i class="bi bi-arrow-left-circle" style="margin-right:5px;"></i>Logout</a> </li>
+                                    <li><a class="dropdown-item" href="/UserRegister/Profile"><i class="bi bi-person-plus" style="margin-right:5px;"></i>Profile</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <br />
+                        @*   <a href="~/Admin/Testing">Test</a>*@
+                        @* <a href="">Admin</a>*@
+                    </div>
+                }
+                else
+                {
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <div style="display:flex" id="icindiv">
+                            <div class="username">
+                                <a>
+                                    <p>Hi-@Session["AdminLogin"]</p>
+                                </a>
+                            </div>
+                            <div>
+                                <div class="dropdown" id="account">
+                                    <a class="atag" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-circle"></i></a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li> <a href="/UserRegister/Logout/" class="dropdown-item"> <i class="bi bi-arrow-left-circle" style="margin-right:5px;"></i>Logout</a> </li>
+                                        <li><a class="dropdown-item" href="/UserRegister/Profile"><i class="bi bi-person-plus" style="margin-right:5px;"></i>Profile</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            }
+
+            <div>
+
+                <!-- Button trigger modal -->
+                @*  <div id="account">
+
+                        <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>*@
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

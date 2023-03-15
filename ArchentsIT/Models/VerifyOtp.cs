@@ -7,7 +7,7 @@ namespace ArchentsIT.Models
 {
     public class VerifyOtp
     {
-        [Required]
+     
         public int Otp { get; set; }    
     }
 }

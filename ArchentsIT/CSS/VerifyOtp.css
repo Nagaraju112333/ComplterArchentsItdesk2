@@ -1,0 +1,21 @@
+﻿.main1 {
+    margin-left: 300px;
+    margin-top: 150px;
+}
+
+    .main1 p {
+        font-size: 2vw;
+    }
+
+#btn1 {
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+}
+
+#emailormobilenumber {
+    font-weight: 800;
+}
+.error{
+    color:red;
+}

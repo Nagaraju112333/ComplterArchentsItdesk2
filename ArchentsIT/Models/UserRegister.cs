@@ -17,17 +17,17 @@ namespace ArchentsIT.Models
     {
         public int Sno { get; set; }
         public string EmpID { get; set; }
-        [Required]
+        
         public string FirstName { get; set; }
-        [Required]
+     
         public string LastName { get; set; }
-        [Required]
+       
         public string Email { get; set; }
-        [Required]
+     
         public string Designation { get; set; }
         public string Password { get; set; }
         public string ResetpasswordCode { get; set; }
-        [Required]
+      
         public string Phone_Number { get; set; }
         public Nullable<int> Firstregister { get; set; }
         public Nullable<int> registercount { get; set; }

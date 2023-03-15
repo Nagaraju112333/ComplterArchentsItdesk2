@@ -346,9 +346,16 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="CSS\AddNewTicket.css" />
+    <Content Include="CSS\CreatePassword.css" />
+    <Content Include="CSS\Createpassword1.css" />
+    <Content Include="CSS\Get.css" />
+    <Content Include="CSS\GetEmployeeRecords.css" />
     <Content Include="CSS\Layout.css" />
     <Content Include="CSS\Login.css" />
+    <Content Include="CSS\Profile.css" />
     <Content Include="CSS\Userregister.css" />
+    <Content Include="CSS\VerifyOtp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
